@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+@import "_theme.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $text-color;
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft Yahei", "sans-serif";
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+input[type=button],
+input[type=submit],
+input[type=search],
+input[type=reset] {
+    -webkit-appearance: none;
+}
+
+textarea {
+    -webkit-appearance: none;
+}
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0;
+}
+
+ul,
+li,
+ol {
+    list-style-type: none;
+}
+
+a {
+    color: #333;
+}
+
+.clearfix:after {
+    content: '';
+    display: table;
+    clear: both;
+}
