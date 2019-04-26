@@ -1,0 +1,35 @@
+.main-layout {
+  height: 100%;
+  .ant-layout-sider {
+    background: #fff;
+  }
+  .main-logo {
+    height: 32px;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 16px;
+  }
+  .ant-layout-header {
+    background: #fff;
+    padding: 0 10px;
+    .sider-trigger {
+      font-size: 18px;
+      line-height: 44px;
+      padding: 10px;
+      cursor: pointer;
+      transition: color 0.3s;
+      &:hover {
+        color: #1890ff;
+      }
+    }
+  }
+}
+
+/deep/ {
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    .main-menu {
+      flex: 1;
+    }
+  }
+}
