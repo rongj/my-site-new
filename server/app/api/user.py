@@ -65,20 +65,19 @@ def bind():
     return jsonWrite(None, 400)
   originUser = User.get_one(g.current_user['id'])
   if bindType == 'phone':
-    # if originUser.phone is not None:
-    #   return jsonWrite('该用户已经绑定手机号', 201)
+    if originUser.phone is not None:
+      return jsonWrite('该用户已经绑定手机号', 201)
     user = User.get_one(bindValue, 'phone')
     if user is not None:
       return jsonWrite('该手机号已绑定其他账号', 201)
-      
+    originUser.update(phone=bindValue)
+  
   if bindType == 'email':
-    # if originUser.email is not None:
-    #   return jsonWrite('该用户已经绑定邮箱账号', 201)
-    user = User.get_one(bindValue, 'email')
+    if originUser.email is not None:
+      return jsonWrite('该用户已经绑定邮箱账号', 201)
+    user = User.query.filter_by(email=bindValue).first()
     if user is not None:
       return jsonWrite('该邮箱账号已绑定其他账号', 201) 
-  
-  originUser.update('{}={}'.format(bindType, bindValue))
-  # originUser.update(phone=123, email=456)
-  # originUser.update(email=456)
+    originUser.update(email=bindValue)
+
   return jsonWrite()

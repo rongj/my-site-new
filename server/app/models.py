@@ -43,10 +43,13 @@ class BaseModel:
   def get_one(cls, value, key='id'):
     return cls.query.filter('{}={}'.format(key, value)).first()
 
+  @classmethod
+  def get_filter(cls, **kwargs):
+    return cls.query.filter_by(**kwargs).first()
+
 
 class Role(BaseModel, db.Model):
   __tablename__ = 'roles'
-
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
   status = db.Column(db.Boolean, default=False, index=True)
@@ -69,7 +72,10 @@ class User(BaseModel, db.Model):
   role = db.Column(db.Integer, index=True, default=UserRole.USER, nullable=False)
   created_at = db.Column(db.DateTime, nullable=False, default=dt.now)
   updated_at = db.Column(db.DateTime, nullable=False, default=dt.now)
-
+  articles = db.relationship('Article', backref='author')
+  comments = db.relationship('Comment', backref='author')
+  userinfo = db.relationship('UserInfo', backref='user', uselist=False)
+  
   def to_dict(self):
     return dict(
       id = self.id,
@@ -80,66 +86,109 @@ class User(BaseModel, db.Model):
     )
 
 
+class UserInfo(BaseModel, db.Model):
+  __tablename__ = 'userinfos'
+  id = db.Column(db.Integer, primary_key=True)
+  qq = db.Column(db.String(16), unique=True)
+  wechart = db.Column(db.String(16), unique=True)
+  weibo = db.Column(db.String(16), unique=True)
+  zfb = db.Column(db.String(16), unique=True)
+  github = db.Column(db.String(16), unique=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
 class ArticleStatus:
-  ACTIVE = 0
-  DRAFT = 1
-  DELETED = 2
+  DRAFT = 0
+  ACTIVE = 1
+  DELETED = -1
 
 
-class Aricle(BaseModel, db.Model):
+article_tag = db.Table(
+  'article_tag',
+  db.Column('article_id', db.Integer, db.ForeignKey('articles.id')),
+  db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'))
+)
+
+
+class Article(BaseModel, db.Model):
   __tablename__ = 'articles'
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(140), nullable=False)
   content = db.Column(db.Text)
-  desc = db.Column(db.Text)
+  description = db.Column(db.Text)
   cover = db.Column(db.String(256))
   status = db.Column(db.Integer, index=True, default=ArticleStatus.ACTIVE, nullable=False)
   created_at = db.Column(db.DateTime, nullable=False, default=dt.now)
   updated_at = db.Column(db.DateTime, nullable=False, default=dt.now)
-  author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+  tagList = db.relationship('Tag', secondary=article_tag, backref='articles')
+  comments = db.relationship('Comment', backref=db.backref('article'), lazy='dynamic')
 
   def to_dict(self):
     return dict(
       id = self.id,
       title = self.title,
       content = self.content,
-      desc = self.desc,
+      description = self.description,
       cover = self.cover,
-      author_id = self.author_id,
-      username = self.user.name if self.user else None,
+      user_id = self.user_id,
+      username = self.author.username if self.author else None,
+      category_id = self.category_id,
+      category_name = self.category.name if self.category else None,
+      tags = [item.to_dict() for item in self.tagList],
       created_at = str(self.created_at),
       updated_at = str(self.updated_at),
     )
+  
+  def add_tag(self, tag):
+    if tag not in self.tagList:
+      self.tagList.append(tag)
+      return True
+    return False
 
+  def remove_tag(self, tag):
+    if tag in self.tagList:
+      self.tagList.remove(tag)
+      return True
+    return False
 
+  
 class Category(BaseModel, db.Model):
   __tablename__ = 'categories'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(16), nullable=False)
+  name = db.Column(db.String(16), index=True, unique=True, nullable=False)
   order_num = db.Column(db.Integer)
   status = db.Column(db.Boolean, default=True)
+  articles = db.relationship('Article', backref='category')
 
-
-class Plate(BaseModel, db.Model):
-  __tablename__ = 'plates'
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(16), nullable=False)
-  order_num = db.Column(db.Integer)
-  status = db.Column(db.Boolean, default=True)
-  category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+  def to_dict(self):
+    return dict(
+      id = self.id,
+      name = self.name,
+      order_num = self.order_num,
+    )
 
 
 class Tag(BaseModel, db.Model):
   __tablename__ = 'tags'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(16))
+  name = db.Column(db.String(16), index=True, unique=True, nullable=False)
   order_num = db.Column(db.Integer)
   status = db.Column(db.Boolean, default=True)
 
+  def to_dict(self):
+    return dict(
+      id = self.id,
+      name = self.name,
+      order_num = self.order_num,
+    )
+
 
 class CommentStatus:
-  PASS = 0
-  REVIEW = 1
+  DELETE = -1
+  REVIEW = 0
+  PASS = 1
   DENY = 2
 
 
@@ -150,5 +199,16 @@ class Comment(BaseModel, db.Model):
   status = db.Column(db.Integer, index=True, default=CommentStatus.PASS, nullable=False)
   created_at = db.Column(db.DateTime, nullable=False, default=dt.now)
   updated_at = db.Column(db.DateTime, nullable=False, default=dt.now)
-  user_id = db.Column(db.Integer, db.ForeignKey('articles.id'), nullable=False)
   article_id = db.Column(db.Integer, db.ForeignKey('articles.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  refer_id = db.Column(db.Integer, db.ForeignKey('comments.id'))
+
+  def to_dict(self):
+    return dict(
+      id = self.id,
+      content = self.content,
+      created_at = str(self.created_at),
+      user_id = self.user_id,
+      username = self.author.username if self.author else None,
+      refer_id = self.refer_id,
+    )

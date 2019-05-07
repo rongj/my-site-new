@@ -18,7 +18,7 @@ class DevConfig(Config):
   SECRET_KEY = "asgSfsf3Xd8ffy]fw8vfd0zbvssqwertsd4sdwe"
 
   # datebase
-  SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@localhost:3306/flask_news?charset=utf8mb4'
+  SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@127.0.0.1:3306/flask_news?charset=utf8mb4'
   SQLALCHEMY_ECHO = True
   SQLALCHEMY_TRACK_MODIFICATIONS = True
 
