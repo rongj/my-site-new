@@ -20,7 +20,6 @@ def create_category():
   new_category.update(order_num=new_category.id)
   return jsonWrite()
 
-
 @bp.route('/category/list', methods=['GET'])
 def get_category_list(): 
   categories = Category.query.filter_by(status=True).order_by('order_num asc').all()

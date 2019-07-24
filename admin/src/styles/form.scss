@@ -1,0 +1,93 @@
+@import "_theme.scss";
+
+// form通用样式
+.form-flex {
+	.ant-form-item {
+		display: flex;
+		margin-bottom: 10px;
+		.ant-form-item-label {
+			width: 85px;
+		}
+		.ant-form-item-control-wrapper {
+			flex: 1;
+			margin-right: 10px;
+		}
+	}
+	.checkbox-list {
+		border: 1px solid #d9d9d9;
+		padding: 5px 10px;
+		border-radius: 4px;
+		.ant-checkbox-wrapper {
+			width: 116px;
+			margin: 4px;
+		}
+	}
+}
+
+/* 工具栏表单样式 */
+.ant-form.page-toolbar-form {
+	width: 100%;
+	padding: 5px 10px;
+	background: #fff;
+	.ant-select {
+		min-width: 80px;
+	}
+	.ant-input:not(.ant-calendar-picker-input) {
+		width: 140px;
+	}
+	.ant-calendar-picker-input {
+		width: 140px;
+	}
+	.ant-calendar-picker > .ant-calendar-picker-input {
+		width: 280px;
+	}
+}
+
+/* checkbox-group */
+.form-checkbox-group {
+	background: #fff;
+	border: 1px solid #d9d9d9;
+	padding: 5px 10px;
+	border-radius: 4px;
+	.checkbox-all {
+		line-height: 38px;
+		border-bottom: 1px solid #e8e8e8;
+	}
+	.checkbox-item-wrap {
+		display: flex;
+		line-height: 38px;
+		.checkbox-label {
+			margin-right: 10px;
+		}
+		.checkbox-content {
+			flex: 1;
+			.ant-checkbox-wrapper {
+				margin-left: 0;
+				margin-right: 8px;
+				margin-bottom: 4px;
+			}
+		}
+	}
+}
+
+/* page-form */
+.page-form {
+	background: #fff;
+	padding: 20px;
+	.form-flex {
+		max-width: 800px;
+		margin: 0 auto;
+		padding-right: 20px;
+		.ant-form-item .ant-form-item-label {
+			width: 260px;
+			overflow: visible;
+			label {
+				float: right;
+			}
+		}
+		.ant-input-number,
+		.ant-calendar-picker {
+			width: 100%!important;
+		}
+	}
+}

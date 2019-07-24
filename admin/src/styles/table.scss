@@ -1,0 +1,110 @@
+@import "_theme.scss";
+
+// Table面板样式
+.ant-table-small {
+	border: none !important;
+}
+
+.ant-table-small.ant-table-bordered {
+	margin: 0 10px;
+	.ant-table-content {
+		// border: 1px solid #e8e8e8!important;
+		border: none!important;
+	}
+}
+
+.ant-table-wrapper {
+	.ant-table-tbody {
+		background: #fff;
+	}
+	.ant-table-thead > tr > th,
+	.ant-table-tbody > tr > td {
+		text-align: center;
+		white-space: nowrap;
+	}
+	.ant-table-thead > tr > th {
+		// font-weight: 700;
+		background: $table-header-bg !important;
+	}
+	.tr-weekend {
+		color: $danger-color;
+	}
+}
+
+.ant-table-selection-column {
+	min-width: 30px!important;
+	width: 30px!important;
+}
+
+.ant-table-empty .ant-table-body {
+	overflow-y: auto!important;
+}
+
+.ant-table-scroll {	
+	.ant-table-header {
+		// overflow-y: hidden!important;
+		margin-bottom: -$table-scrollbar-width!important;
+		&::-webkit-scrollbar {
+			width: 0;
+			height: $table-scrollbar-width;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: $table-scrollbar-width;
+			background: transparent;
+		}
+	}
+	.ant-table-body {
+		// padding-right: 8px;
+		// padding-bottom: 8px;
+		overflow-y: scroll;
+		// max-height: calc(100vh - 50px - 30px - 38px);
+		// &:hover {
+		// 	padding-right: 0;
+		// 	padding-bottom: 0;
+		// }
+		&:hover::-webkit-scrollbar-thumb {
+			background: #d8d8d8;
+		}
+		&::-webkit-scrollbar {
+			width: $table-scrollbar-width;
+			height: $table-scrollbar-width;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: $table-scrollbar-width;
+			background: transparent;
+		}
+	}
+}
+
+.ant-table-fixed-right {
+	.ant-table-body-outer {
+		margin-bottom: 0!important;
+	}
+	.ant-table-body-inner {
+		overflow-y: scroll;
+		&:hover::-webkit-scrollbar-thumb {
+			background: #d8d8d8;
+		}
+		&::-webkit-scrollbar {
+			width: $table-scrollbar-width;
+			height: $table-scrollbar-width;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: $table-scrollbar-width;
+			background: transparent;
+		}
+	}
+}
+
+.table-page {
+	padding: 10px;
+	.ant-pagination {
+		float: right;
+	}
+}
+
+
+// 表格行选中
+.ant-table-row.active {
+	background: $table-header-bg;
+}

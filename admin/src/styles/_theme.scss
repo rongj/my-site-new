@@ -1,0 +1,58 @@
+/* 主题色 */
+$theme-color: #1890ff;
+$danger-color: #f5222d;
+$success-color: #05b112;
+$warning-color: #faad14;
+$gray-color: #999;
+
+/* 主题背景色 */
+// $theme-bg: darken($theme-color, 15%);
+$theme-bg: #3274e6;
+
+/* 文字颜色 */
+$heading-color: #000;
+$text-color: #333;
+$light-color: #666;
+
+/* hover色 */
+$hover-color: #40a9ff;
+
+/* 分割颜色 */
+$line-color: #ddd;
+
+/* 浅背景色 */
+$light-bg: #f8fafb;
+
+/* 背景 */
+$bg-color: #f0f2f5;
+
+/* 边框线 */
+$border-color: #e8e8e8;
+$light-border-color: #f1f1f1;
+
+
+/* 表格头背景色 */
+// $table-header-bg: rgba($theme-color, 0.1);
+$table-header-bg: #e6f7ff;
+
+/* 表格滚动条宽度 */
+$table-scrollbar-width: 4px;
+
+/* 顶部高度 */
+$top-height: 56px;
+$top-height-sm: 48px;
+
+/* 左侧宽度 */
+$left-width: 240px;
+$left-width-sm: 200px;
+$left-collapsed-width: 60px;
+
+/* 媒体查询 */
+$lg: 'screen and (min-width: 1367px)';
+$sm: 'screen and (max-width: 1366px)';
+
+@mixin mq($s) {
+  @media #{$s} {
+    @content;
+  }
+}

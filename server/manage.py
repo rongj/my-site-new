@@ -25,7 +25,7 @@ def dropdb():
   if prompt_bool("Are you sure ? You will lose all your data!"):
     db.drop_all()
 
-manager.add_command('runserver', Server(host='0.0.0.0', port=9090))
+manager.add_command('runserver', Server(host='0.0.0.0', port=9090, use_debugger=False))
 manager.add_command('db', MigrateCommand)
 manager.add_command('apidoc', GenerateApiDoc())
 

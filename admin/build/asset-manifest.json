@@ -1,0 +1,14 @@
+{
+  "app-active.js": "static/js/app-active.2fa0fcfe.chunk.js",
+  "dftt-qid.js": "static/js/dftt-qid.03a7554f.chunk.js",
+  "eastday-newscheck.js": "static/js/eastday-newscheck.9306813d.chunk.js",
+  "login.js": "static/js/login.682cc87e.chunk.js",
+  "main.css": "static/css/main.76d09719.css",
+  "main.js": "static/js/main.2b63bbb6.js",
+  "news-outmanage.js": "static/js/news-outmanage.dde418e3.chunk.js",
+  "news-outsource.js": "static/js/news-outsource.d0fdcbf5.chunk.js",
+  "vendor-main.js": "static/js/vendor-main.fa86b9fa.chunk.js",
+  "video-outmanage.js": "static/js/video-outmanage.c600ab9b.chunk.js",
+  "video-outsource.js": "static/js/video-outsource.a48fa1ad.chunk.js",
+  "video-time.js": "static/js/video-time.6e59852b.chunk.js"
+}
