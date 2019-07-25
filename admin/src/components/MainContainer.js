@@ -66,7 +66,7 @@ export default class extends Component {
       <LocaleProvider locale={zhCN}>
         <Layout className="main-wrapper">
           <Header className="main-header clearfix">
-            <div className="main-header-logo">后台管理</div>
+            <div className="main-header-logo">后台管理系统</div>
             <div className="main-header-right">
               <Dropdown 
                 overlay={

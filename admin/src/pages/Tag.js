@@ -5,7 +5,7 @@ export default class extends Component {
   render() {
     return (
       <div>
-        首页
+        标签列表
       </div>
     )
   }

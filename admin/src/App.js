@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import { Router } from 'react-router';
@@ -13,13 +13,32 @@ export const history = syncHistoryWithStore(createHashHistory(), routingStore);
 
 export const routes = [
   {
-    path: '/',
-    component: () => import(/* webpackChunkName: "app-active" */  '@/pages/Index'),
-    notRequireAuth: true,
+    path: '/article/list',
+    component: () => import(/* webpackChunkName: "article-list" */  '@/pages/Article'),
+  },
+  {
+    path: '/article/create',
+    component: () => import(/* webpackChunkName: "article-create" */  '@/pages/ArticleCreate'),
+  },
+  {
+    path: '/category',
+    component: () => import(/* webpackChunkName: "category" */  '@/pages/Category'),
+  },
+  {
+    path: '/tag',
+    component: () => import(/* webpackChunkName: "tag" */  '@/pages/Tag'),
+  },
+  {
+    path: '/user/list',
+    component: () => import(/* webpackChunkName: "user-list" */  '@/pages/User'),
+  },
+  {
+    path: '/user/create',
+    component: () => import(/* webpackChunkName: "user-create" */  '@/pages/UserCreate'),
   },
   {
     path: '/login',
-    component: () => import(/* webpackChunkName: "login" */  '@/pages/login/Index'),
+    component: () => import(/* webpackChunkName: "login" */  '@/pages/Login'),
     notRequireAuth: true,
   },
 ];
@@ -46,6 +65,7 @@ export default () => {
                   component={asyncComponent(item.component, item.notRequireAuth)} />
               )
             }
+            <Redirect from="/" to="/article/list" />
           </Switch>
         </MainContainer>
       </Router>

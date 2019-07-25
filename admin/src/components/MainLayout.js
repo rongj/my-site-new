@@ -31,71 +31,34 @@ export default class extends Component {
                 defaultSelectedKeys={[location.pathname]}
                 defaultOpenKeys={['/'+location.pathname.split('/')[1]]}
                 onClick={this.handleMenuChange}>
-                {
-                  dataSource.map((item, i) => {
-                    return item.subPermission && item.subPermission.length ?
-                    <SubMenu
-                      key={item.modelpage || (item.subPermission[0].modelpage && '/'+item.subPermission[0].modelpage.split('/')[1])}
-                      title={
-                        <span>
-                          <Icon type="bars" />
-                          <span>{item.permission_name}</span>
-                        </span>
-                      }>
-                      {
-                        item.subPermission.map((subitem, ii) => 
-                          <Menu.Item key={subitem.modelpage || i + '_' + ii}>{subitem.permission_name}</Menu.Item>
-                        )
-                      }
-                    </SubMenu> :
-                    <Menu.Item key={item.modelpage}>{item.permission_name}</Menu.Item>
-                  })
-                }
-                {/* <SubMenu
-                  key="/app"
-                  title={
-                    <span>
-                      <Icon type="bars" />
-                      <span>APP数据统计</span>
-                    </span>
-                  }>
-                  <Menu.Item key="/app/active">APP每日活跃数据</Menu.Item>
-                  <Menu.Item key="/app/qid">APP每日渠道版本数据</Menu.Item>
-                </SubMenu>
                 <SubMenu
-                  key="/eastday"
+                  key="/user"
                   title={
                     <span>
                       <Icon type="bars" />
-                      <span>东方网审核后台</span>
+                      <span>用户管理</span>
                     </span>
                   }>
-                  <Menu.Item key="/eastday/newscheck">新闻审核首页</Menu.Item>
+                  <Menu.Item key="/user/list">所有用户</Menu.Item>
+                  <Menu.Item key="/user/create">添加用户</Menu.Item>
                 </SubMenu>
+                <Menu.Item key="/category">文章分类</Menu.Item>
+                <Menu.Item key="/tag">文章标签</Menu.Item>
                 <SubMenu
-                  key="/video"
+                  key="/article"
                   title={
                     <span>
                       <Icon type="bars" />
-                      <span>视频审核监控(外包)</span>
+                      <span>文章管理</span>
                     </span>
                   }>
-                  <Menu.Item key="/video/outsource">视频审核监控(外包)</Menu.Item>
-                  <Menu.Item key="/video/outmanage">视频审核监控(外包管理)</Menu.Item>
-                  <Menu.Item key="/video/time">视频审核监控-分时</Menu.Item>
+                  <Menu.Item key="/article/list">文章列表</Menu.Item>
+                  <Menu.Item key="/article/create">添加文章</Menu.Item>
                 </SubMenu>
-                <SubMenu
-                  key="/news"
-                  title={
-                    <span>
-                      <Icon type="bars" />
-                      <span>新闻审核监控(外包)</span>
-                    </span>
-                  }>
-                  <Menu.Item key="/news/outsource">新闻审核监控(外包)</Menu.Item>
-                  <Menu.Item key="/news/outmanage">新闻审核监控(外包管理)</Menu.Item>
-                </SubMenu>
-                 */}
+ 
+                <Menu.Item key="/log">日志管理</Menu.Item>
+                <Menu.Item key="/tool">工具管理</Menu.Item>
+                <Menu.Item key="/case">代码案例</Menu.Item>
               </Menu>
             </Sider>
           </div>
