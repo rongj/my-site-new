@@ -1,0 +1,50 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.min.css);
+@import "@/styles/monokai-sublime.scss";
+
+.article-title {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.article-info {
+  margin-top: 20px;
+  color: #8c8c8c;
+  font-size: 12px;
+  padding: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  span {
+    margin-right: 10px;
+    &:after {
+      content: '|';
+      margin-left: 10px;
+    }
+    &:last-child:after {
+      display: none;
+      content: '';
+    }
+  }
+  .item-tags a {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background-color: #e8e8e8;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+  }
+}
+
+.article-body {
+  padding: 20px;
+  max-width: 1000px;
+}

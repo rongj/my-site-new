@@ -1,29 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="main-wrap">
+      <div class="main-content">
+        <div class="main-left">
+          <div class="main-header">
+            <h1>个人网站</h1>
+            <h2>Coding...</h2>
+          </div>
+          <div class="main-navs">
+            <ul>
+              <li><router-link to="/" exact><i class="iconfont icon-home"></i>首页</router-link></li>
+              <li><router-link to="/archive"><i class="iconfont icon-archive"></i>归档</router-link></li>
+              <li><router-link to="/category"><i class="iconfont icon-category"></i>分类</router-link></li>
+              <li><router-link to="/tag"><i class="iconfont icon-biaoqian"></i>标签</router-link></li>
+              <li><router-link to="/about"><i class="iconfont icon-about"></i>关于</router-link></li>
+              <li><router-link to="/tool"><i class="iconfont icon-tool"></i>工具</router-link></li>
+            </ul>
+          </div>
+        </div>
+        <div class="main-right">
+          <router-view/>
+        </div>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+  @import '@/styles/common.scss';
+  @import '@/styles/main.scss';
 </style>

@@ -115,7 +115,8 @@ class Article(BaseModel, db.Model):
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(140), nullable=False)
   content = db.Column(db.Text)
-  description = db.Column(db.Text)
+  edit_content = db.Column(db.Text)
+  summary = db.Column(db.Text)
   cover = db.Column(db.String(256))
   status = db.Column(db.Integer, index=True, default=ArticleStatus.ACTIVE, nullable=False)
   created_at = db.Column(db.DateTime, nullable=False, default=dt.now)
@@ -130,7 +131,8 @@ class Article(BaseModel, db.Model):
       id = self.id,
       title = self.title,
       content = self.content,
-      description = self.description,
+      edit_content = self.edit_content,
+      summary = self.summary,
       cover = self.cover,
       user_id = self.user_id,
       username = self.author.username if self.author else None,
@@ -167,6 +169,7 @@ class Category(BaseModel, db.Model):
       id = self.id,
       name = self.name,
       order_num = self.order_num,
+      article_num = len(self.articles)
     )
 
 
@@ -182,6 +185,7 @@ class Tag(BaseModel, db.Model):
       id = self.id,
       name = self.name,
       order_num = self.order_num,
+      article_num = len(self.articles)
     )
 
 

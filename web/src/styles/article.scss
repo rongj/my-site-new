@@ -1,0 +1,58 @@
+.article-item {
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    a {
+      font-weight: 400;
+      font-size: 20px;
+    }
+  }
+  p {
+    line-height: 24px;
+    color: #666;
+    font-size: 14px;
+  }
+  .item-info {
+    margin-top: 20px;
+    color: #8c8c8c;
+    font-size: 12px;
+    span {
+      margin-right: 10px;
+      &:after {
+        content: '|';
+        margin-left: 10px;
+      }
+      &:last-child:after {
+        display: none;
+        content: '';
+      }
+    }
+    .item-tags a {
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background-color: #e8e8e8;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+  }
+}
+
+
+.no-data {
+  font-size: 14px;
+  text-align: center;
+  color: #999;
+  margin-top: 20px;
+}

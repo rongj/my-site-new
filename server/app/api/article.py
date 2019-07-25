@@ -30,9 +30,12 @@ def get_article_list():
   page = request.values.get('page', 1)
   pageSize = request.values.get('pageSize', 5)
   category_id = request.values.get('category_id', None)
+  tag_id = request.values.get('tag_id', None)
   article_query = Article.query.filter_by(status=1).order_by('created_at desc')
   if category_id:
     article_query = article_query.filter_by(category_id=category_id)
+  if tag_id:
+    article_query = article_query.filter(Article.tagList.any(Tag.id == tag_id))
   articles = article_query.offset(int(pageSize)*(int(page)-1)).limit(pageSize).all()
   total = article_query.count()
   res = [item.to_dict() for item in articles]

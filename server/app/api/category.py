@@ -22,7 +22,12 @@ def create_category():
 
 @bp.route('/category/list', methods=['GET'])
 def get_category_list(): 
+  showNum = request.values.get('showNum', False);
   categories = Category.query.filter_by(status=True).order_by('order_num asc').all()
+  # if showNum:
+  # print('-'*100)
+  # for i in range(len(categories)):
+  #   categories[i].article_num = 20
   res = [item.to_dict() for item in categories]
   return jsonWrite(res)
 
