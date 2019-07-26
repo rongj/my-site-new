@@ -37,7 +37,11 @@
 <script>
   import { mapState, mapActions } from 'vuex'
 
-  export default {
+  export default {    
+    asyncData ({ store, route }) {
+      return store.dispatch('getArticleList', route.query)
+    },
+    
     computed: {
       ...mapState([
         'articleList',
@@ -51,9 +55,9 @@
       }
     },
     
-    created() {
-      this.getData()
-    },
+    // created() {
+    //   this.getData()
+    // },
 
     methods: {
       ...mapActions([

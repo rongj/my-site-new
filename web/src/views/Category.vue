@@ -17,11 +17,14 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
-    computed: mapState(['categoryList']),
-    created() {
-      this.getCategoryList()
+    asyncData ({ store, route }) {
+      return store.dispatch('getCategoryList')
     },
-    methods: mapActions(['getCategoryList']),
+    computed: mapState(['categoryList']),
+    // created() {
+    //   this.getCategoryList()
+    // },
+    // methods: mapActions(['getCategoryList']),
   }
 </script>
 

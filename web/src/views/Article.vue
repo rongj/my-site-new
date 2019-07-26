@@ -26,13 +26,17 @@
   import { mapState, mapActions } from 'vuex'
 
   export default {
+    asyncData ({ store, route }) {
+      return store.dispatch('getArticleDetail', route.params.id)
+    },
+    
     computed: mapState(['articleDetail']),
-    created() {
-      this.getArticleDetail(this.$route.params.id)
-    },
-    methods: {
-      ...mapActions(['getArticleDetail'])
-    },
+    // created() {
+    //   this.getArticleDetail(this.$route.params.id)
+    // },
+    // methods: {
+    //   ...mapActions(['getArticleDetail'])
+    // },
   }
 </script>
 

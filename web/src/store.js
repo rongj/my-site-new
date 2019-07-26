@@ -73,15 +73,18 @@ const actions = {
 const mutations = {
 	save(state, payload) {
     for(let k in payload) {
-      state[k] = payload[k];
+      state[k] = payload[k]
     }
   }
 }
 
-export default new Vuex.Store({
-	// strict: true,
-    state,
-    getters,
-    actions,
-    mutations
-})
+
+export function createStore() {
+  return new Vuex.Store({
+    // strict: true,
+      state,
+      getters,
+      actions,
+      mutations
+  })
+}
