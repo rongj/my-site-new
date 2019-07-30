@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime as dt
-from .extensions import db
+from .extensions import db, bcrypt
 
 class BaseModel:
   def save(self):
@@ -75,6 +75,7 @@ class User(BaseModel, db.Model):
   articles = db.relationship('Article', backref='author')
   comments = db.relationship('Comment', backref='author')
   userinfo = db.relationship('UserInfo', backref='user', uselist=False)
+  token = db.Column(db.String(300))
   
   def to_dict(self):
     return dict(
@@ -84,6 +85,13 @@ class User(BaseModel, db.Model):
       phone = self.phone,
       created_at = str(self.created_at),
     )
+
+  @classmethod
+  def set_password(cls, password):
+    return bcrypt.generate_password_hash(password)
+
+  def check_password(self, value):
+    return bcrypt.check_password_hash(self.password, value)
 
 
 class UserInfo(BaseModel, db.Model):
@@ -125,6 +133,21 @@ class Article(BaseModel, db.Model):
   category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
   tagList = db.relationship('Tag', secondary=article_tag, backref='articles')
   comments = db.relationship('Comment', backref=db.backref('article'), lazy='dynamic')
+
+  def to_dict_list(self):
+    return dict(
+      id = self.id,
+      title = self.title,
+      summary = self.summary,
+      cover = self.cover,
+      user_id = self.user_id,
+      username = self.author.username if self.author else None,
+      category_id = self.category_id,
+      category_name = self.category.name if self.category else None,
+      tags = [item.to_dict() for item in self.tagList],
+      created_at = str(self.created_at),
+      updated_at = str(self.updated_at),
+    )
 
   def to_dict(self):
     return dict(

@@ -1,0 +1,85 @@
+@charset "utf-8";
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+  font-family: Raleway, "Microsoft Yahei",sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type="button"], input[type="submit"], input[type="search"], input[type="reset"] {
+  -webkit-appearance: none;
+}
+
+textarea { -webkit-appearance: none;}   
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+img {
+  vertical-align: middle;
+  border: none;
+}
+
+ul, li {
+  list-style: none;
+}
+
+.clearfix:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.clearfix{
+  zoom:1;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background-color: #555;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform-origin: center center;
+    transform: scaleX(0);
+    transition: .3s;
+  }
+  &:hover {
+    &:after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+#app {
+  height: 100%;
+}

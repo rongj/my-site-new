@@ -31,12 +31,10 @@
     },
     
     computed: mapState(['articleDetail']),
-    // created() {
-    //   this.getArticleDetail(this.$route.params.id)
-    // },
-    // methods: {
-    //   ...mapActions(['getArticleDetail'])
-    // },
+    
+    title () {
+      return this.articleDetail.title
+    },
   }
 </script>
 

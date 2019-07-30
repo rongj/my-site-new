@@ -2,13 +2,13 @@
 
 from flask import Flask
 from .settings import DevConfig
-from .extensions import db, cors
+from .extensions import db, cors, bcrypt, cache, jwt
 
 from .api import bp as api_bp 
 
 def create_app(config=None):
   app = Flask(__name__)
-
+  
   configure_app(app, config)
   configure_extensions(app)
   configure_blueprints(app)
@@ -25,9 +25,12 @@ def configure_app(app, config):
 
 def configure_extensions(app):
   db.init_app(app)
-  origins = app.config.get('CORS_ORIGIN_WHITELIST', '*')
-  cors.init_app(api_bp, origins=origins)
-
+  bcrypt.init_app(app)
+  cache.init_app(app)
+  jwt.init_app(app)
+  
 
 def configure_blueprints(app):
+  origins = app.config.get('CORS_ORIGIN_WHITELIST', '*')
+  cors.init_app(api_bp, origins=origins)
   app.register_blueprint(api_bp, url_prefix='/api')
