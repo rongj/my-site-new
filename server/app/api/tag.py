@@ -4,6 +4,7 @@ from flask import request, g
 from app.models import Tag
 from app.utils.res import jsonWrite
 from app.utils.auth import login_required
+from flask_jwt_extended import current_user, jwt_required, jwt_optional
 
 from . import bp
 
@@ -22,9 +23,11 @@ def create_tag():
 
 
 @bp.route('/tag/list', methods=['GET'])
+@jwt_required
 def get_tag_list(): 
   categories = Tag.query.filter_by(status=True).order_by('order_num asc').all()
   res = [item.to_dict() for item in categories]
+  print(current_user)
   return jsonWrite(res)
 
 

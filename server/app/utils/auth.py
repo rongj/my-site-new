@@ -1,41 +1,66 @@
 # -*- coding: utf-8 -*-
 
+import jwt
+from datetime import datetime, timedelta
+from flask import request, current_app, g
 from functools import wraps
-from flask import request, g, current_app
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from itsdangerous import SignatureExpired, BadSignature
 from app.utils.res import jsonWrite
 
-DEFAULT_VALIDITY = 60*60*24*7
-
-def generate_token(user, expiration=DEFAULT_VALIDITY):
-  s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
-  token = s.dumps({
-    'id': user.id,
-    'username': user.username,
-  }).decode('utf-8')
-  return token
+def generate_token(access_user, exp=24, algorithm='HS256'):
+  ''' 
+  生成access_token
+  :param user_id:自定义部分
+  :param exp:过期时间
+  :param algorithm:加密算法
+  :return:
+  '''
+  key = current_app.config.get('SECRET_KEY')
+  now = datetime.utcnow()
+  exp_datetime = now + timedelta(hours=exp)
+  access_payload = {
+    'exp': exp_datetime,
+    'iat': now,
+    'iss': 'rong',
+    'data': access_user
+  }
+  access_token = jwt.encode(access_payload, key, algorithm=algorithm).decode("utf-8")
+  return access_token
 
 
 def verify_token(token):
-  s = Serializer(current_app.config['SECRET_KEY'])
+  """
+  验证token
+  :param token:
+  :return:
+  """
+  key = current_app.config.get('SECRET_KEY')
   try:
-    data = s.loads(token)
-  except (BadSignature, SignatureExpired):
-    return None
-  return data
+    payload = jwt.decode(token, key, options= {'verify_exp':False})
+    if ('data' in payload and 'id' in payload['data']):
+      return payload['data']
+  except jwt.ExpiredSignatureError:
+    return 'Token过期'
+  except (jwt.InvalidSignatureError, jwt.InvalidTokenError):
+    return '无效的Token'
 
 
 def login_required(f):
+  """
+  登陆保护，验证用户是否登陆
+  :param f:
+  :return:
+  """
   @wraps(f)
-  def decorated(*args, **kwargs):
+  def wrapper(*args, **kwargs):
     token = request.headers.get('Authorization', None)
     if token:
-      string_token = token.encode('ascii', 'ignore')
-      user = verify_token(string_token)
-      if user:
-        g.current_user = user
+      res = verify_token(token)
+      print(res)
+      if res and 'id' in res:
+        g.current_user = res
         return f(*args, **kwargs)
-    return jsonWrite(None, 401)
-
-  return decorated
+      else:
+        return jsonWrite(res or '找不到该用户信息', 201)
+    else:
+      return jsonWrite('没有提供认证token', 201)
+  return wrapper

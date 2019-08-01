@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime as dt
-from .extensions import db, bcrypt
+from .extensions import db
 
 class BaseModel:
   def save(self):
@@ -75,7 +75,7 @@ class User(BaseModel, db.Model):
   articles = db.relationship('Article', backref='author')
   comments = db.relationship('Comment', backref='author')
   userinfo = db.relationship('UserInfo', backref='user', uselist=False)
-  token = db.Column(db.String(300))
+  token = db.Column(db.String(40), default='')
   
   def to_dict(self):
     return dict(
@@ -85,13 +85,6 @@ class User(BaseModel, db.Model):
       phone = self.phone,
       created_at = str(self.created_at),
     )
-
-  @classmethod
-  def set_password(cls, password):
-    return bcrypt.generate_password_hash(password)
-
-  def check_password(self, value):
-    return bcrypt.check_password_hash(self.password, value)
 
 
 class UserInfo(BaseModel, db.Model):

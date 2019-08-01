@@ -1,0 +1,40 @@
+COMMON: &common
+  ENV: 'dev'
+  DEBUG: False
+
+  CSRF_ENABLED: True
+  SECRET_KEY: abc
+
+  # 数据库连接
+  SQLALCHEMY_DATABASE_URI: 'mysql+pymysql://root@127.0.0.1:3306/flask_news?charset=utf8mb4'
+  SQLALCHEMY_ECHO: True
+  SQLALCHEMY_TRACK_MODIFICATIONS: False
+
+  # 日志配置文件路径
+  # LOGGING_CONFIG_PATH: ./config/logging.yaml
+  # 日志文件存放位置
+  # LOGGING_PATH: ./logs
+
+  # redis配置
+  # REDIS_EXPIRE: 60*60
+  # REDIS_HOST: 127.0.0.1
+  # REDIS_PORT: 6379
+  # REDIS_DB: 1
+
+  # CORS
+  CORS_ORIGIN_WHITELIST: '*'
+  
+  # JWT
+  JWT_SECRET_KEY: 'mysite-key'
+  JWT_HEADER_TYPE: 'Token'
+  # JWT_ACCESS_TOKEN_EXPIRES: 15
+
+
+DEVELOPMENT: &development
+  <<: *common
+  DEBUG: True
+
+PRODUCTION: &production
+  <<: *common
+  ENV: 'prod'
+  SECRET_KEY: asgSfsf3Xd8ffy]fw8vfd0zbvssqwertsd4sdwe
