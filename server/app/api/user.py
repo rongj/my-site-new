@@ -41,7 +41,6 @@ def login():
 @bp.route('/auth/user', methods=['GET', 'POST'])
 @login_required
 def get_user():
-  
   return jsonWrite(g.current_user)
 
 
@@ -54,7 +53,7 @@ def reset():
     return jsonWrite('旧密码或新密码不能为空', 201)
   if oldpwd == newpwd:
     return jsonWrite('新密码不能和旧密码一样', 201)
-  user = User.get_one(g.current_user['id'])
+  user = User.get_by_key(g.current_user['id'])
   if user is None:
     return jsonWrite('用户不存在', 201)
   hash_pwd = generate_password_hash(newpwd)
@@ -71,11 +70,11 @@ def bind():
   bindValue = request.values.get('value')
   if bindType is None or bindValue is None:
     return jsonWrite(None, 400)
-  originUser = User.get_one(g.current_user['id'])
+  originUser = User.get_by_key(g.current_user['id'])
   if bindType == 'phone':
     if originUser.phone is not None:
       return jsonWrite('该用户已经绑定手机号', 201)
-    user = User.get_one(bindValue, 'phone')
+    user = User.get_by_key(bindValue, 'phone')
     if user is not None:
       return jsonWrite('该手机号已绑定其他账号', 201)
     originUser.update(phone=bindValue)

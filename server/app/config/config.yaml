@@ -26,8 +26,7 @@ COMMON: &common
   
   # JWT
   JWT_SECRET_KEY: 'mysite-key'
-  JWT_HEADER_TYPE: 'Token'
-  # JWT_ACCESS_TOKEN_EXPIRES: 15
+  JWT_ACCESS_TOKEN_EXPIRES: 24
 
 
 DEVELOPMENT: &development

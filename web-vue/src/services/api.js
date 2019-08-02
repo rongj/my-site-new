@@ -1,15 +1,6 @@
 import axios from './request.js'
 
 const api = {
-  // 登录
-  login: data => axios.post('passport/login', data),
-
-  // 登出
-  logout: () => axios.get('passport/logout'),
-
-  // 注册
-  register: data => axios.post('passport/register', data),
-
   // get all categories
   getCategoryList: () => axios.get('category/list'),
 

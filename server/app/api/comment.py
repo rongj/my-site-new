@@ -39,7 +39,7 @@ def get_comment_list():
 
 @bp.route('/comment/delete/<int:id>', methods=['GET', 'POST'])
 def delete_comment(id, **kwargs): 
-  comment = comment.get_one(id)
+  comment = comment.get_by_key(id)
   if comment is None:
     return jsonWrite('评论不存在', 201)
   comment.update(status=-1)

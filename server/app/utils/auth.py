@@ -6,7 +6,7 @@ from flask import request, current_app, g
 from functools import wraps
 from app.utils.res import jsonWrite
 
-def generate_token(access_user, exp=24, algorithm='HS256'):
+def generate_token(access_user, exp, algorithm='HS256'):
   ''' 
   生成access_token
   :param user_id:自定义部分
@@ -14,7 +14,8 @@ def generate_token(access_user, exp=24, algorithm='HS256'):
   :param algorithm:加密算法
   :return:
   '''
-  key = current_app.config.get('SECRET_KEY')
+  key = current_app.config.get('JWT_SECRET_KEY')
+  exp = exp or current_app.config.get('JWT_ACCESS_TOKEN_EXPIRES')
   now = datetime.utcnow()
   exp_datetime = now + timedelta(hours=exp)
   access_payload = {
@@ -33,7 +34,7 @@ def verify_token(token):
   :param token:
   :return:
   """
-  key = current_app.config.get('SECRET_KEY')
+  key = current_app.config.get('JWT_SECRET_KEY')
   try:
     payload = jwt.decode(token, key, options= {'verify_exp':False})
     if ('data' in payload and 'id' in payload['data']):

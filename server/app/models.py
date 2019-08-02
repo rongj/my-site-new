@@ -31,7 +31,7 @@ class BaseModel:
       db.session.rollback()
 
   @classmethod
-  def delete(cls, record_id):
+  def delete_by_id(cls, record_id):
     record = cls.query.get(record_id)
     try:
       db.session.delete(record)
@@ -40,7 +40,7 @@ class BaseModel:
       db.session.rollback()
 
   @classmethod
-  def get_one(cls, value, key='id'):
+  def get_by_key(cls, value, key='id'):
     return cls.query.filter('{}={}'.format(key, value)).first()
 
   @classmethod
@@ -134,6 +134,7 @@ class Article(BaseModel, db.Model):
       summary = self.summary,
       cover = self.cover,
       user_id = self.user_id,
+      status = self.status,
       username = self.author.username if self.author else None,
       category_id = self.category_id,
       category_name = self.category.name if self.category else None,
@@ -185,6 +186,7 @@ class Category(BaseModel, db.Model):
       id = self.id,
       name = self.name,
       order_num = self.order_num,
+      status = self.status,
       article_num = len(self.articles)
     )
 
@@ -201,6 +203,7 @@ class Tag(BaseModel, db.Model):
       id = self.id,
       name = self.name,
       order_num = self.order_num,
+      status = self.status,
       article_num = len(self.articles)
     )
 

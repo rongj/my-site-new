@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 const { Sider } = Layout;
@@ -15,7 +15,6 @@ export default class extends Component {
     let {
       children,
       location,
-      dataSource = [],
     } = this.props;
     
     return (

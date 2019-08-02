@@ -28,10 +28,11 @@ def create_article():
 @bp.route('/article/list', methods=['GET'])
 def get_article_list(): 
   page = request.values.get('page', 1)
-  pageSize = request.values.get('pageSize', 5)
+  pageSize = request.values.get('pageSize', 10)
   category_id = request.values.get('category_id', None)
   tag_id = request.values.get('tag_id', None)
-  article_query = Article.query.filter_by(status=1).order_by('created_at desc')
+  status = request.values.get('status', 1)
+  article_query = Article.query.filter_by(status=status).order_by('created_at desc')
   if category_id:
     article_query = article_query.filter_by(category_id=category_id)
   if tag_id:
@@ -49,7 +50,7 @@ def get_article_archive():
 
 @bp.route('/article/<int:id>', methods=['GET'])
 def get_article(id): 
-  article = Article.get_one(id)
+  article = Article.get_by_key(id)
   if article is None:
     return jsonWrite('文章不存在', 201)
   return jsonWrite(article.to_dict())
@@ -58,7 +59,7 @@ def get_article(id):
 @bp.route('/article/update/<int:id>', methods=['GET', 'POST'])
 @login_required
 def update_article(id, **kwargs): 
-  article = Article.get_one(id)
+  article = Article.get_by_key(id)
   if article is None:
     return jsonWrite('文章不存在', 201)
   if request.values.get('tags'):
@@ -79,7 +80,7 @@ def update_article(id, **kwargs):
 @bp.route('/article/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_article(id, **kwargs): 
-  article = Article.get_one(id)
+  article = Article.get_by_key(id)
   if article is None:
     return jsonWrite('文章不存在', 201)
   article.update(status=-1)

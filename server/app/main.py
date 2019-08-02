@@ -26,6 +26,6 @@ def configure_extensions(app):
   
 
 def configure_blueprints(app):
-  origins = app.config.get('CORS_ORIGIN_WHITELIST')
+  origins = app.config.get('CORS_ORIGIN_WHITELIST', '*')
   cors.init_app(api_bp, origins=origins)
   app.register_blueprint(api_bp, url_prefix='/api')
