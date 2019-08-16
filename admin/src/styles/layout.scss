@@ -5,7 +5,11 @@
 
 #app {
 	height: 100%;
-	min-width: 1300px;
+	background: $bg-color;
+	.ant-layout {
+		background: #f1f1f1;
+		// background: $bg-color;
+	}
 }
 
 .main-wrapper {
@@ -27,13 +31,7 @@
 	background: $theme-bg;
 	height: $top-height;
 	line-height: $top-height;
-	@include mq($sm) {
-		height: $top-height-sm;
-		line-height: $top-height-sm;
-	}
-	// background: #fff;
 	.main-header-logo {
-		width: $left-width;
 		height: $top-height;
 		padding: 15px 20px;
 		float: left;
@@ -41,53 +39,25 @@
 		font-size: 18px;
 		line-height: $top-height - 30px;
 		color: #fff;
-		// color: $theme-color;
-		// background: rgba(255, 255, 255, .2);
-		@include mq($sm) {
-			width: $left-width-sm;
-			height: $top-height-sm;
-			line-height: $top-height-sm;
-			padding: 10px 20px;
-			line-height: $top-height-sm - 20px;
-			font-size: 16px;
-		}
 	}
 	
-	.main-header-left {
-		float: left;
-		.ant-menu {
-			@include mq($sm) {
-				line-height: $top-height-sm !important;
-			}
-		}
-		.ant-menu-item {
-			font-size: 16px;
-			line-height: $top-height;
-			height: $top-height;
-			@include mq($sm) {
-				height: $top-height-sm;
-				line-height: $top-height-sm;
-				font-size: 15px;
-			}
-			i {
-				margin-right: 4px;
-				font-size: 16px;
-			}
-		}
-	}
 	.main-header-right {
 		float: right;
 		margin-right: 20px;
-		span {
+		.ant-dropdown-link {
 			color: #fff;
 			cursor: pointer;
+			padding-bottom: 14px;
+			i {
+				margin-left: 2px;
+			}
 		}
 	}
-	.login-user {
-		i {
-			margin: 0 5px;
-		}
-	}
+}
+
+.header-dropdown-menu {
+	width: 140px;
+	float: right;
 }
 
 .msg-dropdown-badge {
@@ -150,11 +120,7 @@
 	display: flex;
 	flex-direction: column;
 	max-width: $left-width;
-	// @include mq($sm) {
-  //   max-width: $left-width-sm;
-	// }
 	.iconfont {
-		// color: #333;
 		margin-right: 4px;
 	}
 	.left-menus {
@@ -167,13 +133,6 @@
 .main-sider {
 	height: 100%;
 	overflow: hidden;
-	background: #fff;
-	// @include mq($sm) {
-	// 	flex: 0 0 $left-width-sm !important;
-  //   max-width: $left-width-sm !important;
-  //   min-width: $left-width-sm !important;
-  //   width: $left-width-sm !important;
-	// }
 	&.ant-layout-sider-collapsed {
 		flex: 0 0 $left-collapsed-width !important;
     max-width: $left-collapsed-width !important;
@@ -207,79 +166,32 @@
 	overflow: hidden;
 	.main-content {
 		flex: 1;
-		padding: 15px;
-		@include mq($sm) {
-			padding: 10px;
-		}
+		padding: $spacing;
 		overflow-y: auto;
 	}
 }
 
-// 内容区
-.page-flex {
-	display: flex;
-	flex: 1;
-	overflow: auto;
-	.page-wrap {
-		flex: 1;
-		overflow: auto;
-	}
-	.page-side {
-		margin-left: 15px;
-		@include mq($sm) {
-			margin-left: 10px;
-		}
-		overflow: hidden;
-	}
+.page-side {
+	background: #fff;
+	margin-left: $spacing;
 }
 
-.page-wrap {
-	height: 100%;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	.page-toolbar {
-		margin-bottom: 10px;
-		display: flex;
-		justify-content: space-between;
-	}
-	.page-body {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		overflow: auto;
-		.page-table {
-			overflow: hidden;
-			.ant-table-scroll .ant-table-body {
-				max-height: calc(100vh - #{$top-height} - 30px - 42px - 42px - 38px);
-			}
-			&.page-table2 {
-				.ant-table-scroll .ant-table-body {
-					max-height: calc(100vh - #{$top-height} - 30px - 108px - 42px - 38px);
-				}
-			}
-		}
-		@include mq($sm) {
-			.page-table {
-				.ant-table-scroll .ant-table-body {
-					max-height: calc(100vh - #{$top-height-sm} - 20px - 42px - 42px - 38px);
-				}
-				&.page-table2 {
-					.ant-table-scroll .ant-table-body {
-						max-height: calc(100vh - #{$top-height-sm} - 20px - 147px - 42px - 38px);
-					}
-				}
-			}
-		}
-	}
-	.page-content {
-		flex: 1;
-		overflow: auto;
-	}
+
+/* 内容大标题 */
+.main-title {
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 600;
+  margin: 30px 0 50px;
 }
 
-.chart {
-	padding: 0 15px;
+.main-subtitle {
+	background: #fff;
+	line-height: 40px;
+	padding: $spacing-h $spacing;
+	font-size: 18px;
+	font-weight: 600;
+	text-indent: 10px;
 }
 
 /* 滚动条样式 webkit */

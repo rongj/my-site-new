@@ -23,7 +23,7 @@ export default class extends Component {
           <div className="left-menus">
             <Sider
               className="main-sider"
-              width={240}>
+              width={160}>
               <Menu
                 mode="inline"
                 className="main-menu scrollbar"
@@ -34,20 +34,26 @@ export default class extends Component {
                   key="/user"
                   title={
                     <span>
-                      <Icon type="bars" />
+                      <Icon type="user" />
                       <span>用户管理</span>
                     </span>
                   }>
                   <Menu.Item key="/user/list">所有用户</Menu.Item>
                   <Menu.Item key="/user/create">添加用户</Menu.Item>
                 </SubMenu>
-                <Menu.Item key="/category">文章分类</Menu.Item>
-                <Menu.Item key="/tag">文章标签</Menu.Item>
+                <Menu.Item key="/category">
+                  <Icon type="appstore" />
+                  <span>文章分类</span>
+                </Menu.Item>
+                <Menu.Item key="/tag">
+                  <Icon type="tags" />
+                  <span>文章标签</span>
+                </Menu.Item>
                 <SubMenu
                   key="/article"
                   title={
                     <span>
-                      <Icon type="bars" />
+                      <Icon type="read" />
                       <span>文章管理</span>
                     </span>
                   }>
@@ -55,9 +61,18 @@ export default class extends Component {
                   <Menu.Item key="/article/create">添加文章</Menu.Item>
                 </SubMenu>
  
-                <Menu.Item key="/log">日志管理</Menu.Item>
-                <Menu.Item key="/tool">工具管理</Menu.Item>
-                <Menu.Item key="/case">代码案例</Menu.Item>
+                <Menu.Item key="/log">
+                  <Icon type="profile" />
+                  <span>日志管理</span>
+                </Menu.Item>
+                <Menu.Item key="/tool">
+                  <Icon type="tool" />
+                  <span>工具管理</span>
+                </Menu.Item>
+                <Menu.Item key="/case">
+                  <Icon type="project" />
+                  <span>案例管理</span>
+                </Menu.Item>
               </Menu>
             </Sider>
           </div>

@@ -6,7 +6,7 @@ from flask import request, current_app, g
 from functools import wraps
 from app.utils.res import jsonWrite
 
-def generate_token(access_user, exp, algorithm='HS256'):
+def generate_token(access_user, exp=24, algorithm='HS256'):
   ''' 
   生成access_token
   :param user_id:自定义部分
@@ -56,7 +56,6 @@ def login_required(f):
     token = request.headers.get('Authorization', None)
     if token:
       res = verify_token(token)
-      print(res)
       if res and 'id' in res:
         g.current_user = res
         return f(*args, **kwargs)
@@ -64,4 +63,22 @@ def login_required(f):
         return jsonWrite(res or '找不到该用户信息', 201)
     else:
       return jsonWrite('没有提供认证token', 201)
+  return wrapper
+
+
+def admin_required(f):
+  """
+  编辑保护，验证用户是否可以编辑
+  :param f:
+  :return:
+  """
+  @wraps(f)
+  def wrapper(*args, **kwargs):
+    print('*'*100)
+    print(g.current_user.get('role'))
+    print('*'*100)
+    if g.current_user.get('role') == 2:
+      return f(*args, **kwargs)
+    else:
+      return jsonWrite('无权限修改', 201)
   return wrapper

@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx';
-import api from '@/services/api';
 import message from '@/utils/message';
 import { routingStore } from '@/App';
 
@@ -26,12 +25,8 @@ class GlobalStore {
   // 登出
   @action
   handleLogout = () => {
-    api.logout().then(res => {
-      if(res.code === '1001' || res.code === 200) {
-        message.success('登出成功');
-        this.clearUserData();
-      }
-    });
+    message.success('登出成功');
+    this.clearUserData();
   }
 
 }

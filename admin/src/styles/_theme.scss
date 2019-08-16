@@ -1,13 +1,12 @@
 /* 主题色 */
-$theme-color: #1890ff;
+$theme-color: #3697ff;
 $danger-color: #f5222d;
 $success-color: #05b112;
 $warning-color: #faad14;
 $gray-color: #999;
 
 /* 主题背景色 */
-// $theme-bg: darken($theme-color, 15%);
-$theme-bg: #3274e6;
+$theme-bg: #3597ff;
 
 /* 文字颜色 */
 $heading-color: #000;
@@ -24,23 +23,25 @@ $line-color: #ddd;
 $light-bg: #f8fafb;
 
 /* 背景 */
-$bg-color: #f0f2f5;
+$bg-color: #f5f7f9;
 
 /* 边框线 */
-$border-color: #e8e8e8;
+$border-color: #e9e9e9;
 $light-border-color: #f1f1f1;
 
+/* 间距 */
+$spacing: 20px;
+$spacing-h: 15px;
 
 /* 表格头背景色 */
-// $table-header-bg: rgba($theme-color, 0.1);
-$table-header-bg: #e6f7ff;
+$table-header-bg: #f5f7f9;
 
 /* 表格滚动条宽度 */
 $table-scrollbar-width: 4px;
 
 /* 顶部高度 */
-$top-height: 56px;
-$top-height-sm: 48px;
+$top-height: 48px;
+$top-height-sm: 40px;
 
 /* 左侧宽度 */
 $left-width: 240px;

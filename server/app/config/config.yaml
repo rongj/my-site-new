@@ -10,6 +10,9 @@ COMMON: &common
   SQLALCHEMY_ECHO: True
   SQLALCHEMY_TRACK_MODIFICATIONS: False
 
+  # 上传文件夹
+  UPLOAD_FOLDER: 'upload'
+
   # 日志配置文件路径
   # LOGGING_CONFIG_PATH: ./config/logging.yaml
   # 日志文件存放位置

@@ -1,0 +1,14 @@
+@import "_theme.scss";
+
+.article-form {
+  background: #fff;
+  .article-editor {
+    padding: 0 30px;
+  }
+  .article-btns {
+    padding: 20px 30px;
+    button {
+      margin-right: 10px;
+    }
+  }
+}

@@ -33,6 +33,9 @@ export {
   default as RightOutline
 } from '@ant-design/icons/lib/outline/RightOutline';
 export {
+  default as CaretDownOutline
+} from '@ant-design/icons/lib/outline/CaretDownOutline';
+export {
   default as UndoOutline
 } from '@ant-design/icons/lib/outline/UndoOutline';
 export {
@@ -99,8 +102,23 @@ export {
   default as PlusSquareOutline
 } from '@ant-design/icons/lib/outline/PlusSquareOutline';
 export {
-  default as FileOutline
-} from '@ant-design/icons/lib/outline/FileOutline';
+  default as AppstoreOutline
+} from '@ant-design/icons/lib/outline/AppstoreOutline';
+export {
+  default as ReadOutline
+} from '@ant-design/icons/lib/outline/ReadOutline';
+export {
+  default as TagsOutline
+} from '@ant-design/icons/lib/outline/TagsOutline';
+export {
+  default as ToolOutline
+} from '@ant-design/icons/lib/outline/ToolOutline';
+export {
+  default as ProfileOutline
+} from '@ant-design/icons/lib/outline/ProfileOutline';
+export {
+  default as ProjectOutline
+} from '@ant-design/icons/lib/outline/ProjectOutline';
 
 /* fill */
 export {

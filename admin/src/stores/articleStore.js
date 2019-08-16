@@ -60,7 +60,7 @@ class articleStore {
 
   @action
   deleteItem = (id) => {
-    api.deleteCategory({ id }).then(res => {
+    api.deleteArticle({ id }).then(res => {
       if(res.code === 200) {
         message.success('删除成功');
         this.getData();
@@ -69,20 +69,15 @@ class articleStore {
   }
 
   @action
-  putItem = (type) => {
-    this.submitLoding = true;
-    let apiUrl = type === 'update' ? 'updateCategory' : 'createCategory';
-    return api[apiUrl](this.formData).then(res => {
-      this.submitLoding = false;
+  putItem = (id) => {
+    return api.updateArticle({ id, status: 1 }).then(res => {
       if(res.code === 200) {
-        message.success(type === 'update' ? '更新成功' : '新增成功');
+        message.success('发布成功');
         this.getData();
         return true;
       } else {
         message.error(res.msg);
       }
-    }).catch(e => {
-      this.submitLoding = false;
     })
   }
 }

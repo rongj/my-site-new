@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Form, Select, Radio, Tag, Divider } from 'antd';
+import { Link } from 'react-router-dom';
+import { Form, Select, Radio, Tag, Divider, Popconfirm } from 'antd';
 import TableLayout from '@/components/TableLayout';
 
 const { Option } = Select;
@@ -28,7 +29,9 @@ export default class extends Component {
       tagList,
       categoryList,
       listLoading,
-      listData
+      listData,
+      deleteItem,
+      putItem,
     } = inStore;
 
     const columns = [
@@ -55,23 +58,39 @@ export default class extends Component {
         title: '操作',
         align: 'left',
         render: (text, record) => <span>
-          <a>编辑</a>
+          <Link to={'/article/update/' + record.id}>编辑</Link>
           <Divider type="vertical"/>
           {
             record.status === 0 &&
             <Fragment>
-              <a>删除</a>
+              <Popconfirm
+                title="确定删除？"
+                onConfirm={() => deleteItem(record.id)}>
+                <a>删除</a>
+              </Popconfirm>
               <Divider type="vertical"/>
-              <a>发布</a>
+              <Popconfirm
+                title="确定发布？"
+                onConfirm={() => putItem(record.id)}>
+                <a>发布</a>
+              </Popconfirm>
             </Fragment>
           }
           {
             record.status === 1 &&
-            <a>删除</a>
+            <Popconfirm
+              title="确定删除？"
+              onConfirm={() => deleteItem(record.id)}>
+              <a>删除</a>
+            </Popconfirm>
           }
           {
             record.status === -1 &&
-            <a>发布</a>
+            <Popconfirm
+              title="确定发布？"
+              onConfirm={() => putItem(record.id)}>
+              <a>发布</a>
+            </Popconfirm>
           }
         </span>
       },

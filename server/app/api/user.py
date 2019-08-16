@@ -8,25 +8,26 @@ from app.utils.auth import login_required, generate_token
 
 from . import bp
 
-@bp.route('/auth/register', methods=['GET', 'POST'])
+@bp.route('/auth/register', methods=['POST'])
 def register(): 
-  username = request.values.get('username')
-  password = request.values.get('password')
+  username = request.json.get('username')
+  password = request.json.get('password')
+  role = request.json.get('role', 1)
   if username is None or password is None:
     return jsonWrite(None, 400)
   user = User.query.filter_by(username=username).first()
   if user is not None:
     return jsonWrite('用户名已存在', 201)
   hash_pwd = generate_password_hash(password)
-  newobj = User(username=username, password=hash_pwd)
+  newobj = User(username=username, password=hash_pwd, role=role)
   newobj.save()
   return jsonWrite()
 
 
-@bp.route('/auth/login', methods=['GET', 'POST'])
+@bp.route('/auth/login', methods=['POST'])
 def login():
-  username = request.values.get('username')
-  password = request.values.get('password')
+  username = request.json.get('username')
+  password = request.json.get('password')
   if username is None or password is None:
     return jsonWrite(None, 400)
   user = User.query.filter_by(username=username).first()
@@ -44,11 +45,11 @@ def get_user():
   return jsonWrite(g.current_user)
 
 
-@bp.route('/auth/resetpwd', methods=['GET', 'POST'])
+@bp.route('/auth/resetpwd', methods=['POST'])
 @login_required
 def reset():
-  oldpwd = request.values.get('oldpwd')
-  newpwd = request.values.get('newpwd')
+  oldpwd = request.json.get('oldpwd')
+  newpwd = request.json.get('newpwd')
   if oldpwd is None or newpwd is None:
     return jsonWrite('旧密码或新密码不能为空', 201)
   if oldpwd == newpwd:
@@ -63,11 +64,11 @@ def reset():
   return jsonWrite()
 
 
-@bp.route('/auth/bind', methods=['GET', 'POST'])
+@bp.route('/auth/bind', methods=['POST'])
 @login_required
 def bind():
-  bindType = request.values.get('type')
-  bindValue = request.values.get('value')
+  bindType = request.json.get('type')
+  bindValue = request.json.get('value')
   if bindType is None or bindValue is None:
     return jsonWrite(None, 400)
   originUser = User.get_by_key(g.current_user['id'])

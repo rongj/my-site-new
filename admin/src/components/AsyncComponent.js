@@ -21,10 +21,10 @@ export const asyncComponent = (loadComponent, notRequireAuth) => (
           this.setState({ Component });
           let { history, globalStore } = this.props;
           let { user, clearUserData } = globalStore;
-          // if(!notRequireAuth && !user.token) {
-          //   history.push('/login');
-          //   clearUserData();
-          // }
+          if(!notRequireAuth && !user.token) {
+            history.push('/login');
+            clearUserData();
+          }
         })
         .catch((err) => {
           console.error('Cannot load component in <AsyncComponent />');

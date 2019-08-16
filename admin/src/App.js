@@ -21,6 +21,10 @@ export const routes = [
     component: () => import(/* webpackChunkName: "article-create" */  '@/pages/ArticleCreate'),
   },
   {
+    path: '/article/update/:id',
+    component: () => import(/* webpackChunkName: "article-create" */  '@/pages/ArticleCreate'),
+  },
+  {
     path: '/category',
     component: () => import(/* webpackChunkName: "category" */  '@/pages/Category'),
   },
@@ -35,6 +39,18 @@ export const routes = [
   {
     path: '/user/create',
     component: () => import(/* webpackChunkName: "user-create" */  '@/pages/UserCreate'),
+  },
+  {
+    path: '/log',
+    component: () => import(/* webpackChunkName: "log" */  '@/pages/Log'),
+  },
+  {
+    path: '/tool',
+    component: () => import(/* webpackChunkName: "tool" */  '@/pages/Tool'),
+  },
+  {
+    path: '/case',
+    component: () => import(/* webpackChunkName: "case" */  '@/pages/Case'),
   },
   {
     path: '/login',

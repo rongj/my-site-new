@@ -1,21 +1,6 @@
 @import "_theme.scss";
 
 /* 菜单 */
-.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
-	background: transparent;
-}
-
-.ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item > a {
-	color: rgba(#fff, 0.85);
-}
-
-// @include mq($sm) {
-// 	.ant-menu-sub.ant-menu-inline > .ant-menu-item, .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
-// 		height: 34px;
-// 		line-height: 34px;
-// 	}
-// }
-
 .ant-menu-inline {
 	height: 100%;
 	border-right-color: transparent;
@@ -24,6 +9,11 @@
 .ant-menu-item .iconfont+span, .ant-menu-submenu-title .iconfont+span {
 	opacity: 1;
 	// transition: opacity .3s cubic-bezier(.645,.045,.355,1),width .3s cubic-bezier(.645,.045,.355,1);
+}
+
+.ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+	left: 0;
+	right: auto;
 }
 
 .ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item .iconfont+span, .ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title .iconfont+span, .ant-menu-inline-collapsed>.ant-menu-item .iconfont+span, .ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title .iconfont+span {
@@ -50,9 +40,19 @@
 }
 
 
-/* slider */
-.ant-slider .ant-slider-rail {
-	background: #e1e1e1;
+/* btn */
+.ant-btn.ant-btn-wide {
+	padding-left: 25px;
+	padding-right: 25px;
+	&.ant-btn-lg {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+}
+
+.ant-btn.ant-btn-light {
+	opacity: 0.7;
+	// background: #9acbff;
 }
 
 /* popover */
@@ -74,14 +74,26 @@
 .ant-modal {
 	padding-bottom: 0;
 	max-width: 96%;
-}
-.ant-modal-body {
-	padding: 15px;
-}
-.ant-modal-footer {
-	button {
-		margin-left: 8px;
+	.ant-modal-body {
+		padding: $spacing;
 	}
+	.ant-modal-header {
+		// border-bottom: 0;
+		border-bottom: 1px solid $border-color;
+	}
+	.ant-modal-footer {
+		// border-top: 0;
+		border-top: 1px solid $border-color;
+		button {
+			margin-left: 8px;
+		}
+	}
+}
+
+/* input */
+.ant-input.ant-input-lg,
+.ant-select.ant-select-lg {
+	font-size: 14px;
 }
 
 /* dropdown */

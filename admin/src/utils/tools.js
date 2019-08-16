@@ -106,6 +106,16 @@ export const thousandBit = str => {
 }
 
 /**
+ * 过滤html标签
+ */
+export const filterHtmlTags = str => {
+  if (!str || typeof str !== 'string') {
+    return '';
+  }
+  return str.replace(/<\/?[^>]*>/g, '')
+}
+
+/**
  * 获取树结构最里层的指定key集合
  * @param  {[type]} str [description]
  * @return {[type]}     [description]

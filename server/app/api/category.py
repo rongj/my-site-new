@@ -9,7 +9,7 @@ from . import bp
 
 @bp.route('/category/create', methods=['POST'])
 def create_category(): 
-  name = request.values.get('name')
+  name = request.json.get('name')
   status = request.json.get('status', True)
   if name is None:
     return jsonWrite(None, 400)

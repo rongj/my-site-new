@@ -15,10 +15,6 @@ const { Header } = Layout;
 @inject('globalStore')
 @observer
 export default class extends Component {
-  componentDidMount() {
-    let { globalStore, location } = this.props;
-  }
-
   render() {
     let {
       children,
@@ -53,7 +49,7 @@ export default class extends Component {
                   </Menu>
                 }>
                 <span className="ant-dropdown-link">
-                  {user.realname} <Icon type="down" />
+                {user.username} <Icon type="caret-down" />
                 </span>
               </Dropdown>
             </div>

@@ -58,8 +58,7 @@ class Role(BaseModel, db.Model):
 
 class UserRole:
   USER = 1
-  EDITOR = 2
-  ADMIN = 3
+  ADMIN = 2
 
 
 class User(BaseModel, db.Model):
@@ -83,6 +82,7 @@ class User(BaseModel, db.Model):
       username = self.username,
       email = self.email,
       phone = self.phone,
+      role = self.role,
       created_at = str(self.created_at),
     )
 

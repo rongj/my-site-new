@@ -29,11 +29,13 @@ const api = {
   
   getArticleDetail: data => axios.get(`article/${data.id}`),
 
-  createArticle: data => axios.post('artivle/create', data),
+  createArticle: data => axios.post('article/create', data),
 
-  deleteArticle: data => axios.get(`artivle/delete/${data.id}`),
+  deleteArticle: data => axios.get(`article/delete/${data.id}`),
 
-  updateArticle: data => axios.post(`artivle/update/${data.id}`, data),
+  updateArticle: data => axios.post(`article/update/${data.id}`, data),
+
+  uploadImg: data => axios.post(`upload`, data, { headers: {'Content-Type': 'multipart/form-data'}}),
 }
 
 export default api
