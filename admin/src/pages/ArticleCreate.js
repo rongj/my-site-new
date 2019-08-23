@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Form, Input, Select, Button, Upload, Icon } from 'antd';
+import { Form, Input, Select, Button, Icon } from 'antd';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
 import hljs from 'highlight.js';
@@ -24,7 +24,7 @@ export default class extends Component {
       highlight: function (str, lang) {
         if (lang && hljs.getLanguage(lang)) {
           try {
-            return hljs.highlight(lang, str).value
+            return '<div class="hljs">' + hljs.highlight(lang, str).value + '</div>'
           } catch (__) {}
         }    
         return ''

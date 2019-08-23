@@ -67,6 +67,7 @@ app.use(compression({ threshold: 0 }))
 app.use(favicon('./public/favicon.ico'))
 app.use('/dist', serve('./dist', true))
 app.use('/public', serve('./public', true))
+app.use('/admin', serve('./admin', true))
 
 // since this app has no user-specific content, every page is micro-cacheable.
 // if your app involves user-specific content, you need to implement custom
@@ -114,7 +115,7 @@ app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))
 })
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8008
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
 })

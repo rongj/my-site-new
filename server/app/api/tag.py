@@ -23,7 +23,7 @@ def create_tag():
 
 
 @bp.route('/tag/list', methods=['GET'])
-def get_tag_list(): 
+def get_tag_list():
   tag_query = Tag.query.order_by('order_num asc')
   getall = request.values.get('all', False)
   tags = tag_query.all() if getall else tag_query.filter_by(status=True).all()

@@ -1,0 +1,14 @@
+FROM python:3.7
+MAINTAINER "rongj<10983304@qq.com>"
+ENV PIPURL "https://pypi.douban.com/simple"
+
+RUN mkdir /app
+WORKDIR /app
+COPY . .
+
+RUN pip install -i ${PIPURL} --upgrade pip
+RUN pip install -i ${PIPURL} gunicorn==19.9.0
+RUN pip install -i ${PIPURL} gevent==1.4.0
+RUN pip install -i ${PIPURL} -r requirements.txt
+
+CMD gunicorn  -c gunicorn.conf app:app

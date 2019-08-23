@@ -27,12 +27,17 @@ def get_imgsize(size, img_ratio = 16/9):
   return box
 
 
+@bp.route('/', methods=['GET'])
+def index():
+  return 'Hello Flask Api'
+
 @bp.route('/upload', methods=['POST'])
 def upload(): 
   f_type = request.values.get('name', '')
   if not f_type:
     return jsonWrite('上传类型不能为空', 201)
   file_dir = os.path.join(os.getcwd(), current_app.config['UPLOAD_FOLDER'], f_type)
+  print(file_dir)
   if not os.path.exists(file_dir):
     os.makedirs(file_dir)
   f = request.files.get('uploadFile', None)
@@ -54,7 +59,8 @@ def upload():
   ext = fname.rsplit('.', 1)[1]
   uid = uuid.uuid3(uuid.NAMESPACE_DNS, fname)
   new_filename = ''.join(str(uid).split('-')) + '.' + ext
+  print(os.path.join(file_dir, new_filename))
   crop_im.save(os.path.join(file_dir, new_filename))
   uploaded_path = os.path.join(current_app.config['UPLOAD_FOLDER'], f_type, new_filename).replace('\\','/')
-  full_path = request.url_root + uploaded_path
-  return jsonWrite({'fileName': new_filename, 'filePath': '/' + uploaded_path, 'fullFilePath': full_path})
+  full_path = current_app.config['UPLOAD_URL'] + os.path.join(f_type, new_filename).replace('\\','/')
+  return jsonWrite({'fileName': new_filename, 'filePath': uploaded_path, 'fullFilePath': full_path})

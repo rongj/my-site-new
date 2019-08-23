@@ -1,0 +1,12 @@
+version: "2"
+services:
+  flask-blog:
+    image: flask-blog
+    build: .
+    container_name: flask-blog
+    restart: always
+    ports:
+      - "8012:80"
+    volumes:
+      - /data/web/upload/site/content
+      - /data/web/upload/site/cover

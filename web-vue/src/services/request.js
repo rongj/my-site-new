@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let apiBaseurl = 'http://localhost:9090/api/';
+let apiBaseurl = 'http://blog.api.nodepy.com/';
 
 var instance = axios.create({
   baseURL: apiBaseurl,

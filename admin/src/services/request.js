@@ -3,12 +3,12 @@ import message from '@/utils/message';
 
 import globalStore from '@/stores/globalStore';
 
-let apiBaseurl = 'http://localhost:9090/api/';
+let apiBaseurl = 'http://blog.api.nodepy.com/';
 
-let host = window.location.hostname;
-if(host === 'blog.nodepy.com') {    // 测试
-  apiBaseurl = '//blog.api.nodepy.com/api/';
-}
+// let host = window.location.hostname;
+// if(host === 'blog.nodepy.com') {    // 测试
+//   apiBaseurl = '//blog.api.nodepy.com/';
+// }
 
 var instance = axios.create({
   baseURL: apiBaseurl,

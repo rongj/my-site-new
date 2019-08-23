@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import io
 import yaml
 
 def read_yaml(config_name, config_path):
@@ -9,7 +10,7 @@ def read_yaml(config_name, config_path):
   config_path:配置文件路径
   """
   if config_name and config_path:
-    with open(config_path, 'r', encoding='utf-8') as f:
+    with io.open(config_path, 'r', encoding='utf-8') as f:
       conf = yaml.safe_load(f.read())
     if config_name in conf.keys():
       return conf[config_name.upper()]

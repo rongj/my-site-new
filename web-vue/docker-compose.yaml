@@ -1,0 +1,9 @@
+version: "2"
+services:
+  vue-ssr-blog:
+    image: vue-ssr-blog
+    build: .
+    container_name: vue-ssr-blog
+    restart: always
+    ports:
+      - "8008:80"
